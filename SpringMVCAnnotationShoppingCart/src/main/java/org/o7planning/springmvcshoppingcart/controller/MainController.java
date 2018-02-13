@@ -1,6 +1,10 @@
 package org.o7planning.springmvcshoppingcart.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +33,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.sun.org.apache.xml.internal.security.encryption.DocumentSerializer;
  
 @Controller
 // Enable Hibernate Transaction.
@@ -157,6 +163,7 @@ public class MainController {
         model.addAttribute("cartForm", myCart);
         return "shoppingCart";
     }
+
  
     // GET: Enter customer information.
     @RequestMapping(value = { "/shoppingCartCustomer" }, method = RequestMethod.GET)
@@ -279,4 +286,16 @@ public class MainController {
         response.getOutputStream().close();
     }
      
+//    List<ProductInfo> documents =Arrays.asList(
+//    		new ProductInfo(1, )
+//    		)
+    		
+//    		@RequestMapping(value = { "/productImage" }, method = RequestMethod.GET)
+//    public String getDocuments(Model model) {
+//    	model.addAllAttributes("lista", documents);
+//    	return factura;
+        
+       
+//        }
+//    
 }

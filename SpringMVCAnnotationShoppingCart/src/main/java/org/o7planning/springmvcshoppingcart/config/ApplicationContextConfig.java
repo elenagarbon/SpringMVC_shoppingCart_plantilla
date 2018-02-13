@@ -41,7 +41,7 @@ public class ApplicationContextConfig {
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource rb = new ResourceBundleMessageSource();
         // Load property in message/validator.properties
-        rb.setBasenames(new String[] { "validator" });
+        rb.setBasenames(new String[] { "messages/validator" });
         return rb;
     }
  
