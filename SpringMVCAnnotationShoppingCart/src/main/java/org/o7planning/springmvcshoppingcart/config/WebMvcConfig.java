@@ -8,9 +8,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
  
 @Configuration
@@ -44,4 +46,25 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         configurer.enable();
     }
  
+    // Para generar el pdf
+    @Override
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        configurer
+                .defaultContentType(MediaType.TEXT_HTML)
+                .parameterName("type")
+                .favorParameter(true)
+                .ignoreUnknownPathExtensions(false)
+                .ignoreAcceptHeader(false)
+                .useJaf(true);
+    }
+
+    @Override
+    public void configureViewResolvers(ViewResolverRegistry registry) {
+        registry.jsp("/WEB-INF/views/", ".jsp");
+        registry.enableContentNegotiation(
+                new ItextPdfView()
+                // Use either ItextPdfView or LowagiePdfView
+                // new LowagiePdfView()
+        );
+    }
 }
